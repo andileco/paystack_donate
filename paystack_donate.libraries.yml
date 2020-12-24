@@ -1,0 +1,16 @@
+paystack:
+  remote: 'https://js.paystack.co/v1/inline.js'
+  version: v1
+  license:
+    name: 'ISC'
+    url: 'https://opensource.org/licenses/ISC'
+    gpl-compatable: true
+  js:
+    'https://js.paystack.co/v1/inline.js': {}
+
+paystack_donate:
+  version: 1.x
+  js:
+    js/paystack_donate.js: {}
+  dependencies:
+    - paystack_donate/paystack

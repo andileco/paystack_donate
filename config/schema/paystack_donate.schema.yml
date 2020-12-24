@@ -1,0 +1,12 @@
+paystack_donate_public_key:
+  type: textfield
+  label: 'Paystack Public Key'
+paystack_donate_default_amount:
+  type: textfield
+  label: 'Default Amount'
+paystack_donate_success_message:
+  type: textfield
+  label: 'Success Message'
+paystack_donate_submit_button_value:
+  type: textfield
+  label: 'Submit Button Text'

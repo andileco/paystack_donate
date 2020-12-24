@@ -1,0 +1,5 @@
+type: module
+name: 'Paystack Donate'
+description: 'A simple donate module through Paystack payment gateway.'
+core_version_requirement: ^8 || ^9
+configure: paystack_donate.settings

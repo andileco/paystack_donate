@@ -1,0 +1,5 @@
+paystack_donate.settings:
+  title: 'Paystack Donate Settings'
+  description: 'Set the default settings for the Paystack Donate module.'
+  route_name: paystack_donate.settings
+  parent: system.admin_config_ui

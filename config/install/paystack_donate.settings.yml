@@ -1,0 +1,4 @@
+paystack_donate_public_key:
+paystack_donate_default_amount: 1000
+paystack_donate_success_message: 'Thank you for your donation.'
+paystack_donate_submit_button_value: Donate
