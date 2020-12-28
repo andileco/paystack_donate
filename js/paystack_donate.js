@@ -11,13 +11,13 @@
       let donate_button = document.getElementById('paystack_donate_form_button');
       donate_button.addEventListener("click", donateClick);
 
-      function donateClick() {
+      function donateClick(event) {
         let s = this;
         setTimeout(function () {
           s.value = "Please wait...";
           s.disabled = true;
         }, 0.3);
-
+        event.preventDefault();
         payWithPaystack();
       }
 
