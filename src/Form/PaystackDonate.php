@@ -49,6 +49,12 @@ class PaystackDonate extends FormBase {
 
     $config = $this->config('paystack_donate.settings');
     $form['#attached']['library'][] = 'paystack_donate/paystack_donate';
+    $form['#attached']['drupalSettings']['paystack_key'] = $config->get('paystack_donate_public_key');
+    $form['#attached']['drupalSettings']['success_message'] = $config->get('paystack_donate_success_message') ?? $this->t('Thank you for your donation.');
+    $form['#attributes'] = [
+      //      'onsubmit' => 'return false',
+      'class' => 'donate-form',
+    ];
 
     // Provide a text field.
     $form['paystack_donate_email'] = [
@@ -90,13 +96,7 @@ class PaystackDonate extends FormBase {
       ],
     ];
 
-    $form['#attached']['drupalSettings']['paystack_key'] = $config->get('paystack_donate_public_key');
-    $form['#attached']['drupalSettings']['success_message'] = $config->get('paystack_donate_success_message') ?? 'Thank you for your donation.';
 
-    $form['#attributes'] = [
-      'onsubmit' => 'return false',
-      'class' => 'donate-form',
-    ];
 
     return $form;
   }
@@ -104,8 +104,6 @@ class PaystackDonate extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    parent::submitForm($form, $form_state);
-  }
+  public function submitForm(array &$form, FormStateInterface $form_state) {}
 
 }

@@ -1,7 +1,7 @@
 paystack_donate.settings:
   path: '/admin/config/user-interface/paystack-donate'
   defaults:
-    _form: '\Drupal\paystack_donate\Settings\PaystackDonateSettings'
+    _form: '\Drupal\paystack_donate\Form\PaystackDonateSettings'
     _title: 'Paystack Donate Settings'
   requirements:
     _permission: 'administer paystack_donate'
