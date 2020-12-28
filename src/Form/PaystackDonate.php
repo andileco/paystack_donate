@@ -5,8 +5,24 @@ namespace Drupal\paystack_donate\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\State\State;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class PaystackDonate extends FormBase {
+
+  /**
+   * @var \Drupal\Core\State\State $state
+   */
+  protected $state;
+
+  /**
+   * Class constructor.
+   *
+   * @param \Drupal\Core\State\State $state
+   */
+  public function __construct(State $state) {
+    $this->state = $state;
+  }
 
   /**
    * {@inheritdoc}
@@ -20,12 +36,12 @@ class PaystackDonate extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $config = \Drupal::config('paystack_donate.settings');
+    $config = $this->config('paystack_donate.settings');
     $form['#attached']['library'][] = 'paystack_donate/paystack_donate';
 
     // Provide a text field.
     $form['paystack_donate_email'] = [
-      '#title' => t('Email'),
+      '#title' => $this->t('Email'),
       '#type' => 'textfield',
       '#required' => TRUE,
       '#attributes' => [
@@ -34,15 +50,15 @@ class PaystackDonate extends FormBase {
     ];
 
     $form['paystack_donate_amount'] = [
-      '#title' => t('Amount'),
+      '#title' => $this->t('Amount'),
       '#type' => 'textfield',
       '#required' => TRUE,
-      '#default_value' => \Drupal::state()->get('paystack_donate_default_amount') ?? 1000,
+      '#default_value' => $this->state->get('paystack_donate_default_amount') ?? 1000,
       '#attributes' => ['id' => 'paystack_donate_amount'],
     ];
 
     $form['paystack_donate_currency'] = [
-      '#title' => t('Currency'),
+      '#title' => $this->t('Currency'),
       '#type' => 'select',
       '#required' => TRUE,
       '#options' => [
@@ -57,7 +73,7 @@ class PaystackDonate extends FormBase {
     // Provide a submit button.
     $form['paystack_donate_buton'] = [
       '#type' => 'button',
-      '#value' => \Drupal::state()->get('paystack_donate_submit_button_value') ?? 'Donate',
+      '#value' => $config->get('paystack_donate_submit_button_value') ?? 'Donate',
       '#attributes' => [
         'id' => 'paystack_donate_form_button',
       ],
@@ -73,6 +89,17 @@ class PaystackDonate extends FormBase {
 
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load the service required to construct this class.
+      $container->get('state')
+    );
   }
 
   /**
