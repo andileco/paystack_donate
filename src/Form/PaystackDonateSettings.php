@@ -1,8 +1,7 @@
 <?php
 
 
-namespace Drupal\paystack_donate\Settings;
-
+namespace Drupal\paystack_donate\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -49,14 +48,14 @@ class PaystackDonateSettings extends ConfigFormBase {
     $form['paystack_donate_success_message'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Success Message'),
-      '#default_value' => $config->get('paystack_donate_success_message') ?? 'Thank you for your donation.',
+      '#default_value' => $config->get('paystack_donate_success_message') ?? $this->t('Thank you for your donation.'),
       '#description' => $this->t('Success Message to show in a popup. Leave empty to show the default "Thank you for your donation"'),
     ];
 
     $form['paystack_donate_submit_button_value'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Submit Button Text'),
-      '#default_value' => $config->get('paystack_donate_submit_button_value') ?? 'Donate',
+      '#default_value' => $config->get('paystack_donate_submit_button_value') ?? $this->t('Donate'),
       '#description' => $this->t('Submit button text. Defaults to "donate".'),
       '#required' => TRUE,
     ];

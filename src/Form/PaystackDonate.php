@@ -27,6 +27,17 @@ class PaystackDonate extends FormBase {
   /**
    * {@inheritdoc}
    */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load the service required to construct this class.
+      $container->get('state')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getFormId() {
     return 'paystack_donate_form';
   }
@@ -53,7 +64,7 @@ class PaystackDonate extends FormBase {
       '#title' => $this->t('Amount'),
       '#type' => 'textfield',
       '#required' => TRUE,
-      '#default_value' => $this->state->get('paystack_donate_default_amount') ?? 1000,
+      '#default_value' => $this->state->get('paystack_donate_default_amount') ?? $config->get('paystack_donate_default_amount'),
       '#attributes' => ['id' => 'paystack_donate_amount'],
     ];
 
@@ -73,7 +84,7 @@ class PaystackDonate extends FormBase {
     // Provide a submit button.
     $form['paystack_donate_buton'] = [
       '#type' => 'button',
-      '#value' => $config->get('paystack_donate_submit_button_value') ?? 'Donate',
+      '#value' => $config->get('paystack_donate_submit_button_value') ?? $this->t('Donate'),
       '#attributes' => [
         'id' => 'paystack_donate_form_button',
       ],
@@ -87,19 +98,7 @@ class PaystackDonate extends FormBase {
       'class' => 'donate-form',
     ];
 
-
     return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load the service required to construct this class.
-      $container->get('state')
-    );
   }
 
   /**
