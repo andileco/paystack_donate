@@ -39,6 +39,7 @@
 
           callback: function (response) {
             alert(drupalSettings.success_message);
+            window.location.replace(window.location.origin);
           },
           onClose: function () {
             //alert('window closed');
@@ -46,7 +47,6 @@
         });
         handler.openIframe();
       }
-
     }
   };
 
