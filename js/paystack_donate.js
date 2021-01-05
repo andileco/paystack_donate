@@ -14,7 +14,7 @@
       function donateClick(event) {
         let s = this;
         setTimeout(function () {
-          s.value = "Please wait...";
+          s.value = Drupal.t('Please wait...');
           s.disabled = true;
         }, 0.3);
         event.preventDefault();
@@ -32,17 +32,14 @@
           key: drupalSettings.paystack_key,
           email: the_email,
           amount: the_amount,
-          //ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a
-          // pseudo-unique reference. Please replace with a reference you
-          // generated. Or remove the line entirely so our API will generate one
-          // for you
 
           callback: function (response) {
-            alert(drupalSettings.success_message);
-            window.location.replace(window.location.origin);
+            const message = new Drupal.Message();
+            donate_button.value = Drupal.t('Donate again');
+            message.add(Drupal.t('Thank you for your donation.'));
           },
           onClose: function () {
-            //alert('window closed');
+            // Do nothing.
           }
         });
         handler.openIframe();

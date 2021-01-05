@@ -14,3 +14,4 @@ paystack_donate:
     js/paystack_donate.js: {}
   dependencies:
     - paystack_donate/paystack
+    - core/drupal.message
