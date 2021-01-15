@@ -51,10 +51,7 @@ class PaystackDonate extends FormBase {
     $form['#attached']['library'][] = 'paystack_donate/paystack_donate';
     $form['#attached']['drupalSettings']['paystack_key'] = $config->get('paystack_donate_public_key');
     $form['#attached']['drupalSettings']['success_message'] = $config->get('paystack_donate_success_message') ?? $this->t('Thank you for your donation.');
-    $form['#attributes'] = [
-      //      'onsubmit' => 'return false',
-      'class' => 'donate-form',
-    ];
+    $form['#attributes'] = ['class' => 'donate-form'];
 
     // Provide a text field.
     $form['paystack_donate_email'] = [
